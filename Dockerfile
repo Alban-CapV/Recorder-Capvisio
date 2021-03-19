@@ -40,11 +40,13 @@ RUN make && make install
 RUN useradd -r -d /var/cache/nginx/ -s /sbin/nologin -U nginx
 RUN mkdir /app
 RUN chown nginx /app
-USER nginx
+RUN chown nginx /usr/local/nginx/logs/access.log
+RUN chown nginx /usr/local/nginx/logs/error.log
 
 # Add nginx.conf for configuration stream
 COPY nginx.conf /usr/local/nginx/conf/nginx.conf
 
+USER nginx
 # Launch nginx
 CMD [ "nginx", "-g", "daemon off;" ]
 
