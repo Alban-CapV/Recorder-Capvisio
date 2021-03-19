@@ -36,6 +36,12 @@ RUN ./configure \
         --add-module=../nginx-rtmp-module
 RUN make && make install
 
+# USER 
+RUN useradd -r -d /var/cache/nginx/ -s /sbin/nologin -U nginx
+RUN mkdir /app
+RUN chown nginx /app
+USER nginx
+
 # Add nginx.conf for configuration stream
 COPY nginx.conf /usr/local/nginx/conf/nginx.conf
 
