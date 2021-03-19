@@ -38,6 +38,7 @@ RUN make && make install
 
 # USER 
 RUN useradd -r -d /var/cache/nginx/ -s /sbin/nologin -U nginx
+RUN cd /
 RUN mkdir /app
 RUN chown nginx /app
 RUN chown nginx /usr/local/nginx/logs
