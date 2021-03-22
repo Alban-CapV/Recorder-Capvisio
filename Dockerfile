@@ -36,19 +36,22 @@ RUN ./configure \
         --add-module=../nginx-rtmp-module
 RUN make && make install
 
-# USER 
-RUN useradd -r -d /var/cache/nginx/ -s /sbin/nologin -U nginx
-RUN cd /
-RUN mkdir /app
-RUN chown nginx /app
-RUN chown nginx /usr/local/nginx/logs
+# USER
+# RUN useradd -r -d /var/cache/nginx/ -s /sbin/nologin -U nginx
+# RUN cd /
+# RUN mkdir /app
+# RUN chown nginx /app
+# RUN chown nginx /usr/local/nginx/logs
 
 # Add nginx.conf for configuration stream
 COPY nginx.conf /usr/local/nginx/conf/nginx.conf
 
-USER nginx
+# !!! Not secure
+#USER root
 # Launch nginx
+
 CMD [ "nginx", "-g", "daemon off;" ]
+
 
 
 
